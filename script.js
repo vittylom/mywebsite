@@ -3,6 +3,14 @@ const ctx = canvas.getContext('2d');
 const img = new Image();
 img.src = "https://i.ibb.co/Q9yv5Jk/flappy-bird-set.png";
 
+// Resize canvas dynamically for mobile
+const resizeCanvas = () => {
+  canvas.width = Math.min(window.innerWidth, 431); // Maximum width of 431px
+  canvas.height = window.innerHeight - 100; // Adjust for header
+};
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
 // General settings
 let gamePlaying = false;
 const gravity = 0.3;
@@ -15,8 +23,8 @@ let index = 0, bestScore = 0, flight, flyHeight, currentScore, pipes;
 
 // Pipe settings
 const pipeWidth = 78;
-const pipeGap = 270;
-const pipeLoc = () => 
+const pipeGap = 300;
+const pipeLoc = () =>
   Math.random() * ((canvas.height - (pipeGap + pipeWidth)) - pipeWidth) + pipeWidth;
 
 const setup = () => {
@@ -86,7 +94,7 @@ const render = () => {
     flyHeight = Math.min(flyHeight + flight, canvas.height - size[1]);
   } else {
     ctx.fillText(`Best score: ${bestScore}`, 85, 245);
-    ctx.fillText('Click to play', 90, 535);
+    ctx.fillText('Tap to play', 90, 535);
     ctx.font = "bold 30px courier";
   }
 
@@ -101,6 +109,8 @@ const render = () => {
 setup();
 img.onload = render;
 
-// Start game on click
+// Start game on touch for mobile or click for desktop
+document.addEventListener('touchstart', () => gamePlaying = true);
 document.addEventListener('click', () => gamePlaying = true);
-window.onclick = () => flight = jump;
+window.addEventListener('touchstart', () => flight = jump);
+window.addEventListener('click', () => flight = jump);
