@@ -3,15 +3,20 @@ const ctx = canvas.getContext('2d');
 const img = new Image();
 img.src = "https://i.ibb.co/Q9yv5Jk/flappy-bird-set.png";
 
-// Adatta le dimensioni del canvas
+// Adatta le dimensioni del canvas mantenendo le proporzioni
 const resizeCanvas = () => {
-  canvas.width = Math.min(window.innerWidth, 431); // Larghezza massima di 431px
-  canvas.height = window.innerHeight - 100; // Adatta per lasciare spazio all'header
+  const aspectRatio = 431 / 768; // Rapporto originale
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  // Dimensiona il canvas per riempire lo schermo mantenendo le proporzioni
+  canvas.width = Math.min(screenWidth, 431);
+  canvas.height = Math.min(screenHeight - 100, canvas.width / aspectRatio);
 };
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-// Impostazioni del gioco
+// Impostazioni del gioco (senza modifiche)
 let gamePlaying = false;
 const gravity = 0.2;
 const speed = 1.5;
@@ -21,9 +26,9 @@ const cTenth = canvas.width / 10;
 
 let index = 0, bestScore = 0, flight, flyHeight, currentScore, pipes, birdAngle = 0;
 
-// Impostazioni dei tubi
+// Impostazioni dei tubi (senza modifiche)
 const pipeWidth = 78;
-const pipeGap = 250;
+const pipeGap = 260;
 const pipeLoc = () =>
   Math.random() * ((canvas.height - (pipeGap + pipeWidth)) - pipeWidth) + pipeWidth;
 
@@ -31,23 +36,23 @@ const pipeLoc = () =>
 const setup = () => {
   currentScore = 0;
   flight = jump;
+  birdAngle = 0;
 
   // Posiziona l'uccello al centro dello schermo
   flyHeight = (canvas.height / 2) - (size[1] / 2);
-  birdAngle = 0;
 
   // Crea i tubi iniziali
   pipes = Array(3).fill().map((_, i) => [
-    canvas.width + i * (pipeGap + pipeWidth), 
+    canvas.width + i * (pipeGap + pipeWidth),
     pipeLoc()
   ]);
 };
 
 // Funzione di rendering
 const render = () => {
-  index += 0.3; // Incremento per un movimento fluido
+  index++;
 
-  // Sfondo
+  // Sfondo (nessuna modifica)
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height,
     -(index * speed / 2) % canvas.width + canvas.width, 0, canvas.width, canvas.height);
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height,
@@ -60,7 +65,7 @@ const render = () => {
 
       // Disegna i tubi
       ctx.drawImage(img, 432, 588 - pipe[1], pipeWidth, pipe[1], pipe[0], 0, pipeWidth, pipe[1]);
-      ctx.drawImage(img, 432 + pipeWidth, 108, pipeWidth, canvas.height - pipe[1] + pipeGap, 
+      ctx.drawImage(img, 432 + pipeWidth, 108, pipeWidth, canvas.height - pipe[1] + pipeGap,
         pipe[0], pipe[1] + pipeGap, pipeWidth, canvas.height - pipe[1] + pipeGap);
 
       // Rimuovi e aggiungi nuovi tubi
@@ -82,15 +87,15 @@ const render = () => {
     });
   }
 
-  // Disegna l'uccello
+  // Disegna l'uccello con inclinazione
   ctx.save();
-  ctx.translate(cTenth + size[0] / 2, flyHeight + size[1] / 2); // Trasla al centro dell'uccello
-  ctx.rotate(birdAngle * Math.PI / 180); // Ruota l'uccello
+  ctx.translate(cTenth + size[0] / 2, flyHeight + size[1] / 2); // Centro del disegno
+  ctx.rotate(birdAngle * Math.PI / 180); // Rotazione
   ctx.drawImage(
     img,
-    432, Math.floor((index % 9) / 3) * size[1], 
-    ...size, 
-    -size[0] / 2, -size[1] / 2, // Reimposta origine per disegnare
+    432, Math.floor((index % 9) / 3) * size[1],
+    ...size,
+    -size[0] / 2, -size[1] / 2,
     ...size
   );
   ctx.restore();
@@ -99,7 +104,7 @@ const render = () => {
   if (gamePlaying) {
     flight += gravity;
     flyHeight = Math.min(flyHeight + flight, canvas.height - size[1]); // Limite inferiore
-    birdAngle = Math.min(birdAngle + 2, 90); // Inclinazione verso il basso
+    birdAngle = Math.min(birdAngle + 0.9, 90); // Inclina verso il basso
   } else {
     ctx.font = "bold 20px 'Press Start 2P'";
     ctx.fillText(`Best score: ${bestScore}`, canvas.width / 5, canvas.height / 3);
@@ -118,14 +123,11 @@ const render = () => {
 setup();
 img.onload = render;
 
-// Eventi per avviare il gioco
-document.addEventListener('touchstart', () => { 
-  gamePlaying = true; 
-  flight = jump; 
+// Gestione del tocco/click (nessuna modifica al salto)
+const handleUserInput = () => {
+  gamePlaying = true;
+  flight = jump;
   birdAngle = -45; // Inclinazione verso l'alto
-});
-document.addEventListener('click', () => { 
-  gamePlaying = true; 
-  flight = jump; 
-  birdAngle = -45; // Inclinazione verso l'alto
-});
+};
+document.addEventListener('touchstart', handleUserInput, { passive: true });
+document.addEventListener('mousedown', handleUserInput);
