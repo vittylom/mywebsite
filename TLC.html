@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Induttore e Condensatore</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Viktor</title>
+    
+    </head>
+    <script>
+        function calcola() {
+            var scelta = prompt("1. Induttore\n2. Condensatore\n\nScegli (1 o 2):");
+
+            if (scelta == 1) {
+                // Induttore
+                var f = parseFloat(prompt("Frequenza (Hz):"));
+                var r = parseFloat(prompt("Resistenza (Ohm):"));
+                var l = parseFloat(prompt("Induttore (H):"));
+                var w = 2 * Math.PI * f;
+                var n = (w * l) / r;
+                var sfasG = n;
+
+                // Sfasamento
+                var sfasamento = Math.atan(n) * (180 / Math.PI);
+
+                // Mostra i risultati
+                alert("n = " + n.toFixed(2) + "\nw = " + w.toFixed(2) + "\nsfasG = tan^-1(" + sfasG.toFixed(2) + ")");
+                alert("Sfasamento finale: " + sfasamento.toFixed(2) + "°");
+
+            } else if (scelta == 2) {
+                // Condensatore
+                var f = parseFloat(prompt("Frequenza (Hz):"));
+                var r = parseFloat(prompt("Resistenza (Ohm):"));
+                var c = parseFloat(prompt("Condensatore (F):"));
+                var w = 2 * Math.PI * f;
+                var n = r * w * c;
+                var valG = 1 / Math.sqrt(1 + n);
+                var sfasG = r * w * c;
+
+                // Sfasamento
+                var sfasamento = Math.atan(sfasG);
+                sfasamento = sfasamento * (180 / Math.PI);
+
+                // Mostra i risultati
+                alert("n = " + n.toFixed(2) + "\nw = " + w.toFixed(2) + "\nvalG = " + valG.toFixed(2) + "\nsfasG = tan^-1(" + sfasG.toFixed(2) + ")");
+                alert("Sfasamento finale: " + sfasamento.toFixed(2) + "°");
+            } else {
+                alert("Scelta non valida. Per favore scegli 1 o 2.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="glass-panel">
+        <h1>Calcola per Induttore o Condensatore</h1>
+        <button onclick="calcola()" class="glass-button">Inizia il calcolo</button>
+    </div>
+</body>
+</html>
