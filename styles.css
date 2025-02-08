@@ -1,74 +1,255 @@
+/* Reset di margini e padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background: url(https://bulgogichan.wordpress.com/wp-content/uploads/2015/05/high-quality-space-wallpapers-and-stars-hd-space-wallpapers-1080p-portrait.jpg) no-repeat center center;
-    background-size: cover;
-    font-family: 'Open Sans', sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #222222;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
 }
 
-.glass-panel {
-    color: #fff;
-    margin: 20px auto;
-    background-color: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    width: 20%;
-    border-radius: 15px;
-    padding: 16px;
-    backdrop-filter: blur(10px);
-    text-align: center;
+/* Header */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  color: white;
+  padding: 15px 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.glass-button {
-    display: inline-block;
-    width: 100%;
-    max-width: 100px;
-    padding: 15px 25px;
-    margin: 8px 0;
-    border: 0;
-    text-decoration: none;
-    border-radius: 15px;
-    background-color: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(30px);
-    color: rgba(255,255,255,0.8);
-    font-size: 14px;
-    letter-spacing: 2px;
-   
+/* Logo */
+header .logo h1 {
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.glass-button:hover {
-    background-color: rgba(255,255,255,0.2);
+/* Menu laterale fisso a sinistra */
+.sidebar {
+  position: fixed;
+  top: 60px; /* spazio per l'header */
+  left: 0;
+  width: 200px;
+  background-color: rgba(19, 13, 13, 0.75);
+  color: white;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  backdrop-filter: blur(10px);
+  border-radius: 0px 20px 20px 20px;
+  transition: all 0.3s ease;
 }
 
-h1, h2 {
-    color: rgba(255,255,255,0.8);
-    font-size: 1.5rem;
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-p {
-    color: rgba(137, 255, 235, 0.86);
-    font-size: 1rem;
+.sidebar ul li {
+  margin: 15px;
+  text-align: center;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition-duration: 0.2s;
 }
 
-table {
-    width: 100%;
-    margin: 20px 0;
-    border-collapse: collapse;
-    color: rgba(255,255,255,0.9);
+.sidebar ul li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px 25px;
+  font-size: 18px;
+  transition-duration: 0.2s;
 }
 
-th, td {
-    padding: 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    text-align: center;
-    font-size: 0.9rem;
+.sidebar ul li a:hover {
+  background-color: #c4a7a7;
+  border-radius: 15px;
+  background-color: #bcc974;
+  box-shadow: 1px 1px 2px rgb(228, 84, 1), 0 0 25px rgb(226, 111, 3), 0 0 5px rgb(207, 159, 1);
 }
 
-canvas {
-    margin: 20px 0;
+/* Hover su link attivo */
+.active {
+  border-radius: 15px;
+  background-color: #804902;
+  box-shadow: 1px 1px 10px rgb(228, 84, 1), 0 0 25px rgb(226, 111, 3), 0 0 5px rgb(207, 159, 1);
+
+}
+
+/* Contenuto principale */
+main {
+  margin-left: 250px; /* Spazio per il menu laterale */
+  margin-top: 80px;
+  padding: 20px;
+  color: aliceblue;
+  transition: all 0.3s ease;
+}
+
+main h2 {
+  font-size: 36px;
+  color: #ffdfdf;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Adattamento per dispositivi mobili */
+@media (max-width: 768px) {
+  /* Header */
+  header {
+      padding: 10px 15px;
+      flex-direction: row-reverse; /* Sposta la scritta a destra */
+      justify-content: space-between;
+  }
+
+  header .logo h1 {
+      font-size: 20px;
+  }
+
+  /* Sidebar */
+  .sidebar {
+      position: absolute;
+      top: 40px;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      border-radius: 0;
+      transition: left 0.3s ease;
+  }
+
+  .sidebar ul li {
+      margin: 30px;
+  }
+
+  .sidebar ul li a {
+      padding: 10px;
+      font-size: 16px;
+  }
+
+  /* Contenuto principale */
+  main {
+      margin-left: 0;
+      margin-top: 80px;
+      width: 100%;
+  }
+
+  /* Aggiungere un bottone per la navigazione mobile */
+  .sidebar.open {
+      left: 0;
+  }
+
+  /* Bottoni per il menu mobile */
+  .menu-toggle {
+      display: block;
+      font-size: 28px;
+      background-color: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+  }
+}
+
+/* Bottoni per il menu mobile */
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  font-size: 28px;
+  background-color: transparent;
+  border: none;
+  color: rgb(226, 125, 9);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+      display: block;
+  }
+}
+
+
+
+/* Animazione header */
+h1 {
+	color: rgb(226, 204, 3);
+	font-family: 'Share Tech Mono', 'Cascadia Code', Menlo, Monaco, 'Courier New', monospace;
+	font-size: 6rem;
+	filter: drop-shadow(0px 0px 5px currentColor);
+	
+	&::after {
+		content: '';
+		display: inline-block;
+		width: .2em;
+		height: .7em;
+		background-color: currentColor;
+		margin-left: .1em;
+		animation: blink 1s linear infinite forwards;
+		vertical-align: baseline;
+	}
+}
+
+@keyframes move {
+	from {
+		transform: translateY(0px);
+	}
+	
+	to {
+		transform: translateY(calc(var(--grid) * var(--dir)));
+	}
+}
+
+@keyframes blink {
+	0% {
+		visibility: visible;
+	}
+	
+	50% {
+		visibility: visible;
+	}
+	
+	51% {
+		visibility: hidden;
+	}
+	
+	100% {
+		visibility: hidden;
+	}
+}
+
+
+
+
+td {  /* singola cella della taberlla */
+  padding-top: 30px;
+}
+
+.link{
+  padding-left: 30px;
+  font-size: 30px;
+  font-style: italic;
+  text-decoration-line: underline;
+}
+
+img {
+  float: left;
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  transition-property: width, height;
+  transition-duration: 0.5s;
 }
