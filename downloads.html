@@ -1,24 +1,51 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Viktor</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nome del Sito</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div class="glass-panel">
-        <h1>Downloads:</h1>
-        <a href="http://www.proflorenzini.it/software/EasyPHP-5.3.4.0-setup.exe" class="glass-button">EasyPHP</a>
-        <a href="pagina2.html" class="glass-button">Pagina 2</a>
-        <a href="pagina3.html" class="glass-button">Pagina 3</a>
-        <a href="pagina4.html" class="glass-button">Pagina 4</a>
-        <a href="pagina5.html" class="glass-button">Pagina 5</a>
+
+  <!-- Header con il pulsante di apertura della sidebar -->
+  <header>
+    <button class="menu-toggle" onclick="toggleSidebar()">&#9776;</button>
+    <div class="logo">
+      <h1>Viktor</h1>
     </div>
-    
-    
-    
+  </header>
+
+  <!-- Menu laterale fisso a sinistra -->
+  <nav class="sidebar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="downloads.html" class="active">Downloads</a></li>
+      <li><a href="Utility.html">Utility</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contenuto principale della pagina -->
+  <main>
+    <h2>Pagina Downloads</h2>
+    <p>Qui puoi scaricare alcuni dei nostri contenuti.</p>
+    <table>
+      <tr>
+          <td>
+              <a href="https://phpsources.net/zip_/EasyPHP-5.3.4.0-setup.exe">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Easyphp.png">
+              </a>
+              <a class="link">EasyPHP</a><br><br>
+          </td>
+      </tr>
+  </table>
+
+  </main>
+
+  <script>
+    function toggleSidebar() {
+      document.querySelector('.sidebar').classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
