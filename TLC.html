@@ -1,63 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Induttore e Condensatore</title>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <title>Viktor</title>
-    
-    </head>
-    <script>
-        function calcola() {
-            var scelta = prompt("1. Induttore\n2. Condensatore\n\nScegli (1 o 2):");
-
-            if (scelta == 1) {
-                // Induttore
-                var f = parseFloat(prompt("Frequenza (Hz):"));
-                var r = parseFloat(prompt("Resistenza (Ohm):"));
-                var l = parseFloat(prompt("Induttore (H):"));
-                var w = 2 * Math.PI * f;
-                var n = (w * l) / r;
-                var sfasG = n;
-
-                // Sfasamento
-                var sfasamento = Math.atan(n) * (180 / Math.PI);
-
-                // Mostra i risultati
-                alert("n = " + n.toFixed(2) + "\nw = " + w.toFixed(2) + "\nsfasG = tan^-1(" + sfasG.toFixed(2) + ")");
-                alert("Sfasamento finale: " + sfasamento.toFixed(2) + "°");
-
-            } else if (scelta == 2) {
-                // Condensatore
-                var f = parseFloat(prompt("Frequenza (Hz):"));
-                var r = parseFloat(prompt("Resistenza (Ohm):"));
-                var c = parseFloat(prompt("Condensatore (F):"));
-                var w = 2 * Math.PI * f;
-                var n = r * w * c;
-                var valG = 1 / Math.sqrt(1 + n);
-                var sfasG = r * w * c;
-
-                // Sfasamento
-                var sfasamento = Math.atan(sfasG);
-                sfasamento = sfasamento * (180 / Math.PI);
-
-                // Mostra i risultati
-                alert("n = " + n.toFixed(2) + "\nw = " + w.toFixed(2) + "\nvalG = " + valG.toFixed(2) + "\nsfasG = tan^-1(" + sfasG.toFixed(2) + ")");
-                alert("Sfasamento finale: " + sfasamento.toFixed(2) + "°");
-            } else {
-                alert("Scelta non valida. Per favore scegli 1 o 2.");
-            }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nome del Sito</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+<script>
+    function calcola() {
+        var scelta = prompt("1. Induttore\n2. Condensatore\n\nScegli (1 o 2):");
+
+        if (scelta == 1) {
+            // Induttore
+            var f = parseFloat(prompt("Frequenza (Hz):"));
+            var r = parseFloat(prompt("Resistenza (Ohm):"));
+            var l = parseFloat(prompt("Induttore (H):"));
+            var w = 2 * Math.PI * f;
+            var n = (w * l) / r;
+            var sfasG = n;
+
+            // Sfasamento
+            var sfasamento = Math.atan(n) * (180 / Math.PI);
+
+            // Mostra i risultati
+            alert("n = " + n.toFixed(2) + "\nw = " + w.toFixed(2) + "\nsfasG = tan^-1(" + sfasG.toFixed(2) + ")");
+            alert("Sfasamento finale: " + sfasamento.toFixed(2) + "°");
+
+        } else if (scelta == 2) {
+            // Condensatore
+            var f = parseFloat(prompt("Frequenza (Hz):"));
+            var r = parseFloat(prompt("Resistenza (Ohm):"));
+            var c = parseFloat(prompt("Condensatore (F):"));
+            var w = 2 * Math.PI * f;
+            var n = r * w * c;
+            var valG = 1 / Math.sqrt(1 + n);
+            var sfasG = r * w * c;
+
+            // Sfasamento
+            var sfasamento = Math.atan(sfasG);
+            sfasamento = sfasamento * (180 / Math.PI);
+
+            // Mostra i risultati
+            alert("n = " + n.toFixed(2) + "\nw = " + w.toFixed(2) + "\nvalG = " + valG.toFixed(2) + "\nsfasG = tan^-1(" + sfasG.toFixed(2) + ")");
+            alert("Sfasamento finale: " + sfasamento.toFixed(2) + "°");
+        } else {
+            alert("Scelta non valida. Per favore scegli 1 o 2.");
+        }
+    }
+</script>
 <body>
-    <div class="glass-panel">
-        <h1>Calcola per Induttore o Condensatore</h1>
-        <button onclick="calcola()" class="glass-button">Inizia il calcolo</button>
+
+  <!-- Header con il pulsante di apertura della sidebar -->
+  <header>
+    <button class="menu-toggle" onclick="toggleSidebar()">&#9776;</button>
+    <div class="logo">
+      <h1>Viktor</h1>
     </div>
+  </header>
+
+  <!-- Menu laterale fisso a sinistra -->
+  <nav class="sidebar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="downloads.html">Downloads</a></li>
+      <li><a href="Utility.html" class="active">Utility</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contenuto principale della pagina -->
+  <main>
+    <h2>Pagina Downloads</h2>
+    <p>Qui puoi scaricare alcuni dei nostri contenuti.</p>
+    <table>
+      <tr>
+          <td>
+                  <img onclick="calcola()" src="https://www.pintoelettronica.com/files/np_Files/Foto/37246_2.PNG">
+                  <a class="link" onclick="calcola()"">Circuito 1</a><br><br>
+          </td>
+      </tr>
+      <tr>
+          <td>
+              <a href="https://www.html.it/guide/guida-c/">
+                  <img src="https://www.pintoelettronica.com/files/np_Files/Foto/37246_2.PNG">
+              </a>
+              <a class="link">Circuito 2</a><br><br>
+          </td>
+      </tr>
+      <tr>
+          <td>
+              <a href="https://staff.polito.it/claudio.fornaro/CorsoC/">
+                  <img src="https://www.pintoelettronica.com/files/np_Files/Foto/37246_2.PNG">
+              </a>
+              <a class="link">Circuito 3</a><br><br>
+          </td>
+      </tr>
+      <tr>
+          <td>
+              <a href="https://people.dimai.unifi.it/ferrari/c.pdf">
+                  <img src="https://www.pintoelettronica.com/files/np_Files/Foto/37246_2.PNG">
+              </a>
+              <a class="link">Circuito 4</a><br><br>
+          </td>
+      </tr>
+  </table>
+
+  </main>
+
+  <script>
+    function toggleSidebar() {
+      document.querySelector('.sidebar').classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
